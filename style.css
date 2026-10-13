@@ -1,0 +1,225 @@
+:root {
+  --frame-bg: #c0c0c0;
+  --frame-dark: #808080;
+  --frame-light: #ffffff;
+  --tile: 30px;
+  --cell: 26px;
+  --num-1: #0000ff;
+  --num-2: #008000;
+  --num-3: #ff0000;
+  --num-4: #000080;
+  --num-5: #800000;
+  --num-6: #008080;
+  --num-7: #000000;
+  --num-8: #808080;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #2f6e2f;
+  color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  user-select: none;
+}
+
+.app {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background: #efefef;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+}
+
+.field select {
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 2px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  background: #e6e6e6;
+  box-shadow: inset -2px -2px 0 #9a9a9a, inset 2px 2px 0 #fff;
+  cursor: pointer;
+}
+
+.btn:active {
+  box-shadow: inset 2px 2px 0 #9a9a9a, inset -2px -2px 0 #fff;
+}
+
+.frame {
+  background: var(--frame-bg);
+  border: 3px solid;
+  border-color: var(--frame-light) var(--frame-dark) var(--frame-dark) var(--frame-light);
+  padding: 10px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.panel {
+  background: var(--frame-bg);
+  border: 3px solid;
+  border-color: var(--frame-dark) var(--frame-light) var(--frame-light) var(--frame-dark);
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.counter {
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 2px;
+  background: #000;
+  color: #ff0000;
+  padding: 2px 8px;
+  border: 1px solid #000;
+  min-width: 74px;
+  text-align: center;
+}
+
+.face {
+  font-size: 22px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border: 3px solid;
+  border-color: var(--frame-light) var(--frame-dark) var(--frame-dark) var(--frame-light);
+  background: var(--frame-bg);
+  cursor: pointer;
+  padding: 0;
+}
+
+.face:active {
+  border-color: var(--frame-dark) var(--frame-light) var(--frame-light) var(--frame-dark);
+}
+
+.board-scroll {
+  overflow: auto;
+  max-width: 100%;
+  border: 3px solid;
+  border-color: var(--frame-dark) var(--frame-light) var(--frame-light) var(--frame-dark);
+}
+
+.board {
+  display: grid;
+  gap: 0;
+  width: max-content;
+}
+
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier New", monospace;
+  font-weight: 800;
+  font-size: calc(var(--cell) * 0.62);
+  line-height: 1;
+  background: var(--frame-bg);
+  border: 3px solid;
+  border-color: var(--frame-light) var(--frame-dark) var(--frame-dark) var(--frame-light);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.cell.revealed,
+.cell.flagged,
+.cell.question {
+  border: 1px solid #b0b0b0;
+  cursor: default;
+}
+
+.cell.revealed {
+  background: #cfcfcf;
+}
+
+.cell.pressed {
+  border: 1px solid #b0b0b0;
+}
+
+.cell.bomb {
+  background: #cfcfcf;
+}
+
+.cell.bomb-hit {
+  background: #ff3232;
+}
+
+.cell.wrong-flag {
+  background: #cfcfcf;
+  position: relative;
+}
+
+.cell.wrong-flag::after {
+  content: "\2716";
+  position: absolute;
+  color: #ff0000;
+  font-size: calc(var(--cell) * 0.7);
+}
+
+.cell[data-n="1"] { color: var(--num-1); }
+.cell[data-n="2"] { color: var(--num-2); }
+.cell[data-n="3"] { color: var(--num-3); }
+.cell[data-n="4"] { color: var(--num-4); }
+.cell[data-n="5"] { color: var(--num-5); }
+.cell[data-n="6"] { color: var(--num-6); }
+.cell[data-n="7"] { color: var(--num-7); }
+.cell[data-n="8"] { color: var(--num-8); }
+
+.hint {
+  margin: 0;
+  max-width: 520px;
+  color: #eaffea;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --cell: 26px;
+  }
+}

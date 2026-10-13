@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>扫雷</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="toolbar">
+      <label class="field">
+        <span>难度</span>
+        <select id="difficulty">
+          <option value="beginner">初级 · 9×9 · 10 雷</option>
+          <option value="intermediate">中级 · 16×16 · 40 雷</option>
+          <option value="expert">高级 · 30×16 · 99 雷</option>
+        </select>
+      </label>
+      <button id="new-game" class="btn">新游戏</button>
+    </div>
+
+    <div class="frame">
+      <div class="panel">
+        <div class="counter" id="mine-counter" title="剩余雷数">010</div>
+        <button class="face" id="face" title="重新开始">🙂</button>
+        <div class="counter" id="timer" title="用时（秒）">000</div>
+      </div>
+      <div class="board-scroll">
+        <div id="board" class="board"></div>
+      </div>
+    </div>
+
+    <p class="hint">
+      左键翻开 · 右键插旗（长按可插旗）· 数字上点/双键快速展开<br />
+      首次点击必定安全
+    </p>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
